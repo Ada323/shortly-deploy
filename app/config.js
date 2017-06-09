@@ -7,6 +7,7 @@ var knex = require('knex')({
   useNullAsDefault: true
 });
 var db = require('bookshelf')(knex);
+var num = 0;
 
 db.knex.schema.hasTable('urls').then(function(exists) {
   if (!exists) {
