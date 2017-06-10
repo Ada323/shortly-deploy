@@ -71,38 +71,50 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
-      }
-    },
-    gitadd: {
-      task: {
-        options: {
-          all: true
+        pwd: {
+          command: 'git --help'
         },
-        files: {
-          src: ['public/**/*.js']
-        }
-      }
-    },
-    gitcommit: {
-      yourTarget: {
-        options: {
-          // Target-specific options go here.
-          message: 'Commit from grunt'
+        add: {
+          command: 'git add .'
         },
-        files: {
-            // Specify the files you want to commit
-          src: ['public/**/*.js']
+        commit: {
+          command: 'git commit -m "commit from grunt"'
+        },
+        push: {
+          command: 'git push live'
         }
       }
     },
-    gitpush: {
-      yourTarget: {
-        options: {
-          // Target-specific options go here.
-          remote: 'live'
-        }
-      }
-    },
+    // gitadd: {
+    //   task: {
+    //     options: {
+    //       all: true
+    //     },
+    //     files: {
+    //       src: ['public/**/*.js']
+    //     }
+    //   }
+    // },
+    // gitcommit: {
+    //   yourTarget: {
+    //     options: {
+    //       // Target-specific options go here.
+    //       message: 'Commit from grunt'
+    //     },
+    //     files: {
+    //         // Specify the files you want to commit
+    //       src: ['public/**/*.js']
+    //     }
+    //   }
+    // },
+    // gitpush: {
+    //   yourTarget: {
+    //     options: {
+    //       // Target-specific options go here.
+    //       remote: 'live'
+    //     }
+    //   }
+    // },
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -113,7 +125,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
-  grunt.loadNpmTasks('grunt-git');
+  // grunt.loadNpmTasks('grunt-git');
 
   grunt.registerTask('server-dev', function (target) {
     grunt.task.run([ 'nodemon', 'watch' ]);
@@ -140,8 +152,9 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('deploy', function(n) {
+    console.log('HELLO');
     if(grunt.option('prod')) {
-      ['gitadd', 'gitcommit', 'gitpush'];
+      ['shell:pwd', 'shell:add', 'shell:commit', 'shell:push'];
     }
     grunt.task.run(['concat', 'uglify', 'eslint', 'mochaTest', 'server-dev']);
   });
