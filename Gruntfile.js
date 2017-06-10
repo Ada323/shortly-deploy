@@ -72,40 +72,10 @@ module.exports = function(grunt) {
     shell: {
       prodServer: {
         push: {
-          command: 'git push live'
+          command: 'git push live master'
         }
       }
     },
-    // gitadd: {
-    //   task: {
-    //     options: {
-    //       all: true
-    //     },
-    //     files: {
-    //       src: ['public/**/*.js']
-    //     }
-    //   }
-    // },
-    // gitcommit: {
-    //   yourTarget: {
-    //     options: {
-    //       // Target-specific options go here.
-    //       message: 'Commit from grunt'
-    //     },
-    //     files: {
-    //         // Specify the files you want to commit
-    //       src: ['public/**/*.js']
-    //     }
-    //   }
-    // },
-    // gitpush: {
-    //   yourTarget: {
-    //     options: {
-    //       // Target-specific options go here.
-    //       remote: 'live'
-    //     }
-    //   }
-    // },
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -116,7 +86,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
-  // grunt.loadNpmTasks('grunt-git');
 
   grunt.registerTask('server-dev', function (target) {
     grunt.task.run([ 'nodemon', 'watch' ]);
@@ -145,7 +114,7 @@ module.exports = function(grunt) {
   grunt.registerTask('deploy', function(n) {
     console.log('HELLO');
     if(grunt.option('prod')) {
-      ['shell'];
+      grunt.task.run(['shell']);
     }
     grunt.task.run(['concat', 'uglify', 'eslint', 'mochaTest', 'server-dev']);
   });
