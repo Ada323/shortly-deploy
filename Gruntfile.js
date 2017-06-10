@@ -70,10 +70,8 @@ module.exports = function(grunt) {
     },
 
     shell: {
-      prodServer: {
-        push: {
-          command: 'git push live master'
-        }
+      push: {
+        command: 'git push live master'
       }
     },
   });
@@ -112,9 +110,8 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('deploy', function(n) {
-    console.log('HELLO');
     if(grunt.option('prod')) {
-      grunt.task.run(['shell']);
+      grunt.task.run(['shell:push']);
     }
     grunt.task.run(['concat', 'uglify', 'eslint', 'mochaTest', 'server-dev']);
   });
