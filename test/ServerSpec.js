@@ -48,6 +48,8 @@ describe('', function() {
             'url': 'http://www.roflzoo.com/'})
           .expect(200)
           .expect(function(res) {
+            console.log('RES URL', res.body.url);
+            console.log('RES CODE', res.body.code);
             expect(res.body.url).to.equal('http://www.roflzoo.com/');
             expect(res.body.code).to.be.ok;
           })
@@ -124,6 +126,7 @@ describe('', function() {
           .expect(302)
           .expect(function(res) {
             var redirect = res.headers.location;
+            console.log('REDIRECT', redirect);
             expect(redirect).to.equal('http://www.roflzoo.com/');
           })
           .end(done);
