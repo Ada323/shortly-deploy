@@ -144,7 +144,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', function(n) {
     if(grunt.option('prod')) {
-      ['shell:push'];
+      ['shell'];
     }
     grunt.task.run(['concat', 'uglify', 'eslint', 'mochaTest', 'server-dev']);
   });
