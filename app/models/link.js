@@ -1,4 +1,4 @@
-var db = require('../config');
+var db = require('../config-old');
 var crypto = require('crypto');
 
 var Link = db.Model.extend({
