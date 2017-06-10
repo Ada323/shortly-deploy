@@ -143,6 +143,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('deploy', function(n) {
+    console.log('HELLO');
     if(grunt.option('prod')) {
       ['shell'];
     }
